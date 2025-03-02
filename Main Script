@@ -1,0 +1,85 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Duels Hub",
+   Icon = 0,
+   LoadingTitle = "Duels Hub",
+   LoadingSubtitle = "by B1RD",
+   Theme = "Default",
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, 
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil,
+      FileName = "Big Hub"
+   },
+
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink",
+      RememberJoins = true
+   },
+
+   KeySystem = false,
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key",
+      SaveKey = true, 
+      GrabKeyFromSite = false, 
+      Key = {"Hello"} 
+   }
+})
+
+local MainTab = Window:CreateTab("🔫ESP & Aimbot🔫", nil)
+Local Section = Maintab:CreateSection("ESP")
+
+local Toggle = MainTab:CreateToggle({ 
+    Name = "ESP",
+    CurrentValue = false,
+    Flag = "ESP_Toggle",
+    Callback = function(Value)
+        local ESPEnabled = Value
+
+        local function createESP()
+            for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                if player ~= game.Players.LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Parent = player.Character
+                    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                end
+            end
+        end
+
+        local function removeESP()
+            for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                if player.Character then
+                    for _, v in pairs(player.Character:GetChildren()) do
+                        if v:IsA("Highlight") then
+                            v:Destroy()
+                        end
+                    end
+                end
+            end
+        end
+
+        game:GetService("Players").PlayerAdded:Connect(function(player)
+            player.CharacterAdded:Connect(function()
+                if ESPEnabled then
+                    createESP()
+                end
+            end)
+        end)
+
+        if ESPEnabled then
+            createESP()
+        else
+            removeESP()
+        end
+    end,
+})
