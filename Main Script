@@ -2,26 +2,22 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "Duels Hub",
-   Icon = 0,
+   Icon = nil, -- Set an actual image URL or nil if no icon is needed
    LoadingTitle = "Duels Hub",
    LoadingSubtitle = "by B1RD",
    Theme = "Default",
-
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false, 
-
    ConfigurationSaving = {
       Enabled = true,
       FolderName = nil,
       FileName = "Big Hub"
    },
-
    Discord = {
       Enabled = false,
       Invite = "noinvitelink",
       RememberJoins = true
    },
-
    KeySystem = false,
    KeySettings = {
       Title = "Untitled",
@@ -35,7 +31,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 local MainTab = Window:CreateTab("🔫ESP & Aimbot🔫", nil)
-Local Section = Maintab:CreateSection("ESP")
+local Section = MainTab:CreateSection("ESP") -- Fixed capitalization
 
 local Toggle = MainTab:CreateToggle({ 
     Name = "ESP",
